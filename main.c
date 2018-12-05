@@ -11,19 +11,21 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
 
 int		main(void)
 {
-	int		fd;
+	int	fd;
 	char	**line;
+	int	tmp;
 
 	if (!(line = (char**)malloc(sizeof(char*) * BUFF_SIZE)))
 		return (1);
-	if ((fd = open("test42~", O_RDWR | O_CREAT | O_APPEND, S_IRWXU)) == -1)
+	if ((fd = open("test42", O_RDWR | O_CREAT | O_APPEND, S_IRWXU)) == -1)
 		return (1);
-	get_next_line(fd, line);
-	printf ("%s", line[1]);
+	//write(fd, "123456789\nABCDEFGH\n", 18);
+	tmp = get_next_line(fd, line);
+	printf ("LINE: %s\nRetGNL: %d", *line, tmp);
+	if (close(fd) == -1)
+		return (1);
 	return (0);
 }

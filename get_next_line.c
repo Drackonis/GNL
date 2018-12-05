@@ -14,14 +14,14 @@
 
 int		get_next_line(const int fd, char **line)
 {
-	static char	**tab;
+	//static char	**tab;
 	int			ret;
 	char		buf[BUFF_SIZE + 1];
 
 	if (fd < 0 || line == NULL || BUFF_SIZE < 1)
 		return (-1);
 	ret = read(fd, buf, BUFF_SIZE);
-	buf[ret] = '\0';
-	ft_putstr_fd(buf, 1);
+	buf[ret + 1] = '\0';
+	*line = ft_strsub(buf, 0, BUFF_SIZE);
 	return (0);
 }
