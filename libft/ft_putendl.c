@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkergast <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/05 16:37:34 by rkergast          #+#    #+#             */
-/*   Updated: 2018/12/05 17:07:49 by rkergast         ###   ########.fr       */
+/*   Created: 2018/11/21 15:35:53 by rkergast          #+#    #+#             */
+/*   Updated: 2018/11/27 17:24:07 by rkergast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <stdio.h>
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include "libft/libft.h"
+void	ft_putendl(char const *s)
+{
+	int		i;
+	char	b;
 
-# define BUFF_SIZE 42
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+	if (!s)
+		return ;
+	i = 0;
+	b = '\n';
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	write(1, &b, 1);
+}
+/*
+**int   main(int argc, char **argv)
+**{
+**      argc++;
+**      ft_putendl(argv[1]);
+**      return (0);
+**}
+*/

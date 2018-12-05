@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkergast <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/05 16:37:34 by rkergast          #+#    #+#             */
-/*   Updated: 2018/12/05 17:07:49 by rkergast         ###   ########.fr       */
+/*   Created: 2018/11/16 10:57:18 by rkergast          #+#    #+#             */
+/*   Updated: 2018/11/27 17:21:49 by rkergast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <stdio.h>
+#include <stdlib.h>
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include "libft/libft.h"
-
-# define BUFF_SIZE 42
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+void	ft_memdel(void **ap)
+{
+	if (!ap)
+		return ;
+	if (*ap)
+	{
+		free(*ap);
+		*ap = NULL;
+	}
+}
+/*
+**int	main(int argc, char **argv)
+**{
+**	argc++;
+**	ft_memdel((void**)argv[1]);
+**	printf("%s", argv[1]);
+**	return (0);
+**}
+*/

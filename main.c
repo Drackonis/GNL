@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkergast <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/05 16:37:34 by rkergast          #+#    #+#             */
-/*   Updated: 2018/12/05 17:07:49 by rkergast         ###   ########.fr       */
+/*   Created: 2018/12/05 16:58:25 by rkergast          #+#    #+#             */
+/*   Updated: 2018/12/05 17:05:30 by rkergast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include "libft/libft.h"
+int		main(void)
+{
+	int		fd;
+	char	**line;
 
-# define BUFF_SIZE 42
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+	if (!(line = (char**)malloc(sizeof(char*) * BUFF_SIZE)))
+		return (1);
+	if ((fd = open("test42~", O_RDWR | O_CREAT | O_APPEND, S_IRWXU)) == -1)
+		return (1);
+	get_next_line(fd, line);
+	printf ("%s", line[1]);
+	return (0);
+}

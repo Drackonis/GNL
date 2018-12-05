@@ -1,26 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkergast <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/05 16:37:34 by rkergast          #+#    #+#             */
-/*   Updated: 2018/12/05 17:07:49 by rkergast         ###   ########.fr       */
+/*   Created: 2018/11/21 15:35:12 by rkergast          #+#    #+#             */
+/*   Updated: 2018/11/27 13:03:21 by rkergast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <stdio.h>
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include "libft/libft.h"
+void	ft_putnbr(int n)
+{
+	unsigned int	nb;
+	int				t;
+	char			c;
 
-# define BUFF_SIZE 42
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+	t = 0;
+	if (n < 0)
+	{
+		c = '-';
+		write(1, &c, 1);
+		nb = n * (-1);
+	}
+	else
+		nb = n;
+	if (nb >= 10)
+	{
+		t = nb % 10;
+		c = t + 48;
+		ft_putnbr(nb / 10);
+	}
+	else
+		c = nb + 48;
+	write(1, &c, 1);
+}
+/*
+**int	main(void)
+**{
+**	ft_putnbr(-2147483647 - 1);
+**	return (0);
+**}
+*/

@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkergast <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/05 16:39:03 by rkergast          #+#    #+#             */
-/*   Updated: 2018/12/05 16:57:55 by rkergast         ###   ########.fr       */
+/*   Created: 2018/11/16 10:57:39 by rkergast          #+#    #+#             */
+/*   Updated: 2018/11/16 14:04:37 by rkergast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include <stdio.h>
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line)
+char	*ft_strcat(char *c1, const char *c2)
 {
-	static char	**tab;
-	int			ret;
-	char		buf[BUFF_SIZE + 1];
+	unsigned int	i;
+	unsigned int	j;
 
-	if (fd < 0 || line == NULL || BUFF_SIZE < 1)
-		return (-1);
-	ret = read(fd, buf, BUFF_SIZE);
-	buf[ret] = '\0';
-	ft_putstr_fd(buf, 1);
-	return (0);
+	i = 0;
+	j = 0;
+	while (c1[i])
+		i++;
+	while (c2[j])
+	{
+		c1[i + j] = c2[j];
+		j++;
+	}
+	c1[i + j] = '\0';
+	return (c1);
 }
+/*
+**int	main(int argc, char **argv)
+**{
+**	argc++;
+**	char *str1 = argv[1];
+**	char *str2 = argv[2];
+**	ft_strcat(str1, str2);
+**	printf("%s", str1);
+**	return (0);
+**}
+*/
