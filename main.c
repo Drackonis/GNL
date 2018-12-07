@@ -20,15 +20,19 @@ int		main(void)
 	int	i;
 
 	i = 0;
-	if (!(line = (char**)malloc(sizeof(char*) * BUFF_SIZE)))
-		return (1);
 	if ((fd = open("test42", O_RDWR | O_CREAT | O_APPEND, S_IRWXU)) == -1)
 		return (1);
-	while (i == 0)
+	if (!(line = (char**)malloc(sizeof(char*) * BUFF_SIZE)))
+		return (1);
+
+	while (i < 256)
 	{
 		tmp = get_next_line(fd, line);
-		printf ("LINE: %s\nRetGNL: %d\n", *line, tmp);
+		printf ("LINE: %s\nRetGNL: %d\n----------------------------------------\n", *line, tmp);
 		getchar();
+		i++;
+		free(*line);
+		*line = NULL;
 	}
 	if (close(fd) == -1)
 		return (1);
