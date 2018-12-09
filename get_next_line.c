@@ -43,20 +43,31 @@ int		get_next_line(const int fd, char **line)
 		printf ("TAB EXIST : |%s\n", tab[fd]);
 	if (tab[fd] != NULL)
 	{
-		*line = ft_strdup(tab[fd]);
+		printf ("BUF : |%s\n", buf);
+		ft_strncpy(buf, tab[fd], BUFF_SIZE);
+		buf[BUFF_SIZE] = '\0';
 		free(tab[fd]);
 		tab[fd] = NULL;
-		printf ("ADD PREVIOUS TAB -> line : |%s\n", *line);
+		printf ("TAB[FD] : |%s\n", tab[fd]);
+		printf ("ADD PREVIOUS TAB -> buf : |%s\n", buf);
 	}
-	//FILL BUF WITH FD
-	printf ("BUF : |%s\n", buf);
-	ret = read(fd, buf, BUFF_SIZE);
-	buf[ret + 1] = '\0';
-	printf ("FILL BUF ; |%s\n", buf);
+	else
+	{
+		//FILL BUF WITH FD
+		printf ("BUF : |%s\n", buf);
+		ret = read(fd, buf, BUFF_SIZE);
+		buf[ret + 1] = '\0';
+		printf ("FILL BUF ; |%s\n", buf);
+	}
 	printf ("ALONG BUFFER\n");
 	while (buf[i])
 	{
-		printf ("|%d->%c|\n", i, buf[i]);
+		if (buf[i] == '\n')
+			printf ("|%d->NEW LINE|\n", i);
+		else if (buf[i] < 32)
+			printf ("|%d->ZERO|\n", i);
+		else
+			printf ("|%d->%c|\n", i, buf[i]);
 		//END OF LINE IN BUFFER
 		if (buf[i] == '\n')
 		{
@@ -65,11 +76,21 @@ int		get_next_line(const int fd, char **line)
 			if (tab[fd])
 				tmp = tab[fd];
 			tab[fd] = (ft_strcpy(ft_strnew(BUFF_SIZE - i), buf + i + 1));
-			printf ("FILL TAB[FD] with end of buf : |%s\n", tab[fd]); 
-			*line = ft_strncat(*line, buf, i);
+			printf ("FILL TAB[FD] with end of buf : |%s\n", tab[fd]);
+			printf ("FILL LINE (%s) with BUF (%s) & stop at i (%d)\n", *line, buf, i);
+			if (!*line)
+			{
+				printf ("line = strncat\n");
+				*line = ft_strncat(ft_strnew(i), buf, i);
+			}
+			else
+			{
+				printf ("line = strjoin\n");
+				*line = ft_strjoin(*line, ft_strncat(ft_strnew(i + 1), buf, i));
+			}
 			if (tmp)
 				free(tmp);
-			printf ("FILL LINE whith start of buf : |%s\n", *line); 
+			printf ("NEW LINE : |%s\n", *line); 
 			j++;
 			break;
 		}
