@@ -6,7 +6,7 @@
 /*   By: rkergast <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:58:25 by rkergast          #+#    #+#             */
-/*   Updated: 2018/12/10 16:44:26 by rkergast         ###   ########.fr       */
+/*   Updated: 2018/12/10 16:46:00 by rkergast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 int		main(void)
 {
-	int		fd;
+	int	fd;
 	char	**line;
-	int		tmp;
-	int		i;
+	int	tmp;
+	int	i;
 
 	i = 0;
-	i = 0;
-	tmp = 1;
 	if ((fd = open("test42", O_RDWR | O_CREAT | O_APPEND, S_IRWXU)) == -1)
 		return (1);
-	if (!(line = (char**)malloc(sizeof(char*) * BUFF_SIZE)))
+	if (!(line = (char**)malloc(sizeof(char*))))
 		return (1);
 	*line = NULL;
-	while (tmp == 1)
+	while (i < 256)
 	{
 		tmp = get_next_line(fd, line);
-		printf("LINE : |%s\nRET : |%d\n", *line, tmp);
+		printf ("LINE: %s\nRetGNL: %d\n----------------------------------------\n", *line, tmp);
 		getchar();
 		i++;
 		free(*line);
