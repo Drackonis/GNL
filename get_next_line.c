@@ -26,7 +26,7 @@ static int		check_buffer(char buf[BUFF_SIZE + 1], char **tab,\
 	char	*tmp;
 
 	i = 0;
-	tmp = ft_strnew(BUFF_SIZE + 1);
+	tmp = ft_strnew(BUFF_SIZE);
 	while (buf[i])
 	{
 		if (buf[i] == '\n')
